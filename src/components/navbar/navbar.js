@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import logo from "./logo.png";
 
 class Navbar extends Component {
   render() {
     return (
-      <nav className="navbar navbar-light bg-light ">
-        <img
-          src={logo}
-          width="52"
-          height="52"
-          className="d-inline-block align-top"
-          alt="logo"
-        />
+      <nav className="navbar navbar-light bg-light">
+        <div className="navbar-brand mx-auto">
+          <img
+            src="https://mideclaranot.com/dnot/wp-content/uploads/2019/06/dnot.mx_.png"
+            width="200"
+            height="auto"
+            className="d-inline-block align-top"
+            alt="logo"
+          />
+        </div>
       </nav>
     );
   }

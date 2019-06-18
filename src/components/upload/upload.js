@@ -8,16 +8,18 @@ const Dragger = Upload.Dragger;
 const props = {
   name: "file",
   multiple: true,
-  action: "http://dnot.mx/api/public/index.php/excel/txt",
+  action: "https://mideclaranot.com/api/public/index.php/excel/txt",
   onChange(info) {
     const status = info.file.status;
     if (status !== "uploading") {
       //console.log(info.file, info.fileList);
     }
     if (status === "done") {
+      //console.log(info.file);
       message.success(`${info.file.name} archivo subido exitosamente`);
-      FileDownload(info.file.response, "isrxa___adq.txt");
+      FileDownload(info.file.response, "racoo_isrxe.txt");
     } else if (status === "error") {
+      //console.log(info.file);
       message.error(`${info.file.name} ocurrio un error al subir el archivo`);
     }
   }
@@ -31,27 +33,27 @@ class FileUpload extends Component {
           <div className="offset-md-3 col-md-2 text-center">
             <a
               className="btn btn-link"
-              href="http://mideclaranot.com/archivos/EnajenacionV2.xlsx"
+              href="https://mideclaranot.com/archivos/EnajenacionV2.xlsx"
             >
               <img
                 src="https://img.icons8.com/color/48/000000/ms-excel.png"
                 alt="icon_excel"
               />
               <br />
-              Enajenacion
+              Enajenación
             </a>
           </div>
           <div className="col-md-2 text-center">
             <a
               className="btn btn-link"
-              href="http://mideclaranot.com/archivos/EnajenacionV2_ejemplo.xlsx"
+              href="https://mideclaranot.com/archivos/EnajenacionV2_ejemplo.xlsx"
             >
               <img
                 src="https://img.icons8.com/color/48/000000/ms-excel.png"
                 alt="icon_excel"
               />
               <br />
-              Enajenacion Ejemplo
+              Enajenación Ejemplo
             </a>
           </div>
           <div className="col-md-2 text-center">
