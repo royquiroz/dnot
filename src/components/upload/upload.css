@@ -1,0 +1,12 @@
+.container {
+  padding: 2em 0;
+}
+
+.img-sat {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+.dropzone {
+  border: 1px solid black;
+}
