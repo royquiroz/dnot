@@ -89,6 +89,19 @@ class FileUpload extends Component {
             </Dragger>
           </div>
         </div>
+
+        <div className="row">
+          <diV className="offset-md-2 col-md-8">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe
+                className="embed-responsive-item"
+                src="https://www.youtube.com/embed/Cv888Zkr-VY"
+                title="youtube_video"
+                allowfullscreen
+              />
+            </div>
+          </diV>
+        </div>
       </div>
     );
   }
