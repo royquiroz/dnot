@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { message } from "antd";
+import { message } from "antd";
 import { newToken, validateToken } from "../../services/login";
 
 import "./login.css";
@@ -26,10 +26,12 @@ class Login extends Component {
     if (token.response) {
       let check = await validateToken();
 
-      console.log(check);
+      //console.log(check.message);
+      if (check.response) this.props.history.push("/upload");
     }
 
-    console.log(token);
+    //console.log(token);
+    message.error(token.message, 3);
   };
 
   render() {

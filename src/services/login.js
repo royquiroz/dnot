@@ -16,7 +16,7 @@ export const validateToken = async () => {
   let token = JSON.parse(localStorage.getItem("token"));
   let res = await axios.post(`${url}/validate`, { token });
 
-  console.log(res.data);
+  if (!res.data.response) localStorage.removeItem("token");
 
   return res.data;
 };
