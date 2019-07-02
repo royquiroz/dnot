@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { Menu, Dropdown, Avatar } from "antd";
+
 import { removeToken } from "../../services/login";
 import "./navbar.css";
 
@@ -17,6 +19,22 @@ const tabs = [
     link: "/prueba"
   }
 ];
+
+const ProfileMenu = (
+  <Menu>
+    <Menu.Item>
+      <Link rel="noopener noreferrer" to="/profile">
+        Perfil
+      </Link>
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item>
+      <div rel="noopener noreferrer" onClick={removeToken}>
+        Cerrar Sesión
+      </div>
+    </Menu.Item>
+  </Menu>
+);
 
 class Navbar extends Component {
   constructor() {
@@ -65,13 +83,9 @@ class Navbar extends Component {
               </li>
             ))}
           </ul>
-          <button
-            className="btn btn-outline-success"
-            type="button"
-            onClick={removeToken}
-          >
-            Cerrar Sesión
-          </button>
+          <Dropdown overlay={ProfileMenu} placement="bottomLeft">
+            <Avatar>G</Avatar>
+          </Dropdown>
         </div>
       </nav>
     );
