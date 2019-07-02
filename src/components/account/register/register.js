@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { message } from "antd";
-import { newToken, validateToken } from "../../services/login";
+import { register } from "../../../services/register";
 
-import "./login.css";
+import "./register.css";
 
-class Login extends Component {
+class Register extends Component {
   constructor() {
     super();
     this.state = {
@@ -23,16 +23,20 @@ class Login extends Component {
 
   handleLogin = async e => {
     e.preventDefault();
-    let token = await newToken(this.state.user);
-    if (token.response) {
-      let check = await validateToken();
+    let response = await register(this.state.user);
 
-      //console.log(check.message);
-      if (check.response) this.props.history.push("/upload");
+    //console.log(response);
+
+    if (response.status !== 200) {
+      for (const key in response.data) {
+        message.error(`${key}: ${response.data[key]}`);
+      }
+    } else if (!response.data.response) {
+      message.error(response.data.message);
+    } else {
+      message.success(response.data.message);
+      this.props.history.push("/");
     }
-
-    //console.log(token);
-    message.error(token.message, 3);
   };
 
   render() {
@@ -49,45 +53,50 @@ class Login extends Component {
                 />
                 <form className="form-sigin" onSubmit={this.handleLogin}>
                   <label htmlFor="inputUsername" className="sr-only">
-                    Username
+                    Nombre de usuario
                   </label>
                   <input
                     type="text"
                     id="inputUsername"
                     className="form-control form-control-lg"
-                    placeholder="Username"
-                    name="username"
+                    placeholder="Nombre de Usuario"
+                    name="usuario"
+                    onChange={this.handleChange}
+                  />
+                  <label htmlFor="inputEmail" className="sr-only">
+                    Email
+                  </label>
+                  <input
+                    type="text"
+                    id="inputEmail"
+                    className="form-control form-control-lg"
+                    placeholder="Email"
+                    name="email"
                     onChange={this.handleChange}
                   />
                   <label htmlFor="inputPassword" className="sr-only">
-                    Password
+                    Contraseña
                   </label>
                   <input
                     type="password"
                     id="inputPassword"
                     className="form-control form-control-lg"
-                    placeholder="Password"
-                    name="password"
+                    placeholder="Contraseña"
+                    name="clave"
                     onChange={this.handleChange}
                   />
                   <button
-                    className="btn btn-lg btn-primary btn-block"
+                    className="btn btn-lg btn-success btn-block"
                     type="submit"
                   >
-                    Iniciar Sesión
+                    Registrarse
                   </button>
                 </form>
-                <div className="d-flex justify-content-between">
+                <div className="d-flex justify-content-end">
                   <div className="letter-size">
-                    ¿Olvidaste la{" "}
-                    <Link to="/forgot-password" className="register-link">
-                      contraseña
-                    </Link>
-                    ?
-                  </div>
-                  <div className="letter-size">
-                    <Link to="/register" className="register-link">
-                      Registrate
+                    ¿Ya tienes cuenta?{" "}
+                    <Link to="/" className="register-link">
+                      Inicia Sesión
                     </Link>
                   </div>
                 </div>
@@ -100,4 +109,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;

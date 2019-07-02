@@ -1,31 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { message } from "antd";
-import { register } from "../../services/register";
+import { validationEmail } from "../../../services/validation";
 
-import "./register.css";
+import "./validation.css";
 
-class Register extends Component {
+class Forgot extends Component {
   constructor() {
     super();
     this.state = {
-      user: {}
+      email: ""
     };
   }
 
   handleChange = e => {
-    const { user } = this.state;
-    let field = e.target.name;
-    user[field] = e.target.value;
-
-    this.setState({ user });
+    this.setState({ email: e.target.value });
   };
 
   handleLogin = async e => {
     e.preventDefault();
-    let response = await register(this.state.user);
-
-    console.log(response);
+    let response = await validationEmail(this.state);
+    //console.log(response);
 
     if (response.status !== 200) {
       for (const key in response.data) {
@@ -34,8 +29,9 @@ class Register extends Component {
     } else if (!response.data.response) {
       message.error(response.data.message);
     } else {
-      message.success(response.data.message);
-      this.props.history.push("/");
+      message.success(
+        `${response.data.message}, favor de revisar su bandeja de entrada`
+      );
     }
   };
 
@@ -52,17 +48,6 @@ class Register extends Component {
                   alt="logo"
                 />
                 <form className="form-sigin" onSubmit={this.handleLogin}>
-                  <label htmlFor="inputUsername" className="sr-only">
-                    Nombre de usuario
-                  </label>
-                  <input
-                    type="text"
-                    id="inputUsername"
-                    className="form-control form-control-lg"
-                    placeholder="Nombre de Usuario"
-                    name="usuario"
-                    onChange={this.handleChange}
-                  />
                   <label htmlFor="inputEmail" className="sr-only">
                     Email
                   </label>
@@ -74,29 +59,17 @@ class Register extends Component {
                     name="email"
                     onChange={this.handleChange}
                   />
-                  <label htmlFor="inputPassword" className="sr-only">
-                    Contraseña
-                  </label>
-                  <input
-                    type="password"
-                    id="inputPassword"
-                    className="form-control form-control-lg"
-                    placeholder="Contraseña"
-                    name="clave"
-                    onChange={this.handleChange}
-                  />
                   <button
-                    className="btn btn-lg btn-success btn-block"
+                    className="btn btn-lg btn-danger btn-block"
                     type="submit"
                   >
-                    Registrarse
+                    Enviar link a mi correo
                   </button>
                 </form>
                 <div className="d-flex justify-content-end">
                   <div className="letter-size">
-                    ¿Ya tienes cuenta?{" "}
                     <Link to="/" className="register-link">
-                      Inicia Sesión
+                      Iniciar Sesión
                     </Link>
                   </div>
                 </div>
@@ -109,4 +82,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default Forgot;

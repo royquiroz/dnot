@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { message } from "antd";
-import { forgotPassword } from "../../services/forgot";
+import { forgotPassword } from "../../../services/forgot";
 
 import "./forgot.css";
 
@@ -20,7 +20,7 @@ class Forgot extends Component {
   handleLogin = async e => {
     e.preventDefault();
     let response = await forgotPassword(this.state);
-    console.log(response);
+    //console.log(response);
 
     if (response.status !== 200) {
       for (const key in response.data) {

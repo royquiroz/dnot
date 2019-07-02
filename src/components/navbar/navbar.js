@@ -66,7 +66,7 @@ class Navbar extends Component {
             ))}
           </ul>
           <button
-            class="btn btn-outline-success"
+            className="btn btn-outline-success"
             type="button"
             onClick={removeToken}
           >
