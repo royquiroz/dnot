@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Menu, Dropdown, Avatar } from "antd";
 
 import { removeToken } from "../../services/login";
@@ -7,8 +7,8 @@ import "./navbar.css";
 
 const tabs = [
   {
-    name: "Prueba",
-    link: "/prueba"
+    name: "ISR x Enaj",
+    link: "/upload"
   },
   {
     name: "Prueba",
@@ -23,10 +23,17 @@ const tabs = [
 const ProfileMenu = (
   <Menu>
     <Menu.Item>
-      <Link rel="noopener noreferrer" to="/profile">
+      <NavLink rel="noopener noreferrer" to="/profile">
         Perfil
-      </Link>
+      </NavLink>
     </Menu.Item>
+    {JSON.parse(localStorage.getItem("id")) === 2 ? (
+      <Menu.Item>
+        <NavLink rel="noopener noreferrer" to="/users-list">
+          Lista de usuarios
+        </NavLink>
+      </Menu.Item>
+    ) : null}
     <Menu.Divider />
     <Menu.Item>
       <div rel="noopener noreferrer" onClick={removeToken}>
@@ -84,7 +91,11 @@ class Navbar extends Component {
             ))}
           </ul>
           <Dropdown overlay={ProfileMenu} placement="bottomLeft">
-            <Avatar>G</Avatar>
+            <Avatar>
+              {JSON.parse(localStorage.getItem("user"))
+                .usuario.substr(0, 1)
+                .toUpperCase()}
+            </Avatar>
           </Dropdown>
         </div>
       </nav>

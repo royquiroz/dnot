@@ -5,14 +5,18 @@ export const newToken = async user => {
   let res = await axios.post(`${config.url}/token/new`, user);
 
   if (res.data.response) {
-    localStorage.setItem("token", JSON.stringify(res.data.result));
+    let token = res.data.result.token;
+    localStorage.setItem("token", token);
+    delete res.data.result.token;
+    localStorage.setItem("user", JSON.stringify(res.data.result));
+    localStorage.setItem("id", res.data.result.usuario_id);
   }
 
   return res.data;
 };
 
 export const validateToken = async () => {
-  let token = JSON.parse(localStorage.getItem("token"));
+  let token = localStorage.getItem("token");
   let res = await axios.post(`${config.url}/token/validate`, { token });
 
   if (!res.data.response) localStorage.removeItem("token");
@@ -22,6 +26,8 @@ export const validateToken = async () => {
 
 export const removeToken = async () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  localStorage.removeItem("id");
 
   window.location.reload();
 };

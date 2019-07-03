@@ -5,7 +5,9 @@ import Login from "../components/account/login/login";
 import Register from "../components/account/register/register";
 import Forgot from "../components/account/forgot/forgot";
 import Validation from "../components/account/validation/validation";
+import Profile from "../components/account/profile/profile";
 import FileUpload from "../components/upload/upload";
+import UsersList from "../components/users/users";
 
 const Router = () => (
   <Switch>
@@ -59,6 +61,28 @@ const Router = () => (
       render={props =>
         localStorage.getItem("token") ? (
           <FileUpload {...props} />
+        ) : (
+          <Redirect to="/" />
+        )
+      }
+    />
+    <Route
+      exact
+      path="/profile"
+      render={props =>
+        localStorage.getItem("token") ? (
+          <Profile {...props} />
+        ) : (
+          <Redirect to="/" />
+        )
+      }
+    />
+    <Route
+      exact
+      path="/users-list"
+      render={props =>
+        localStorage.getItem("token") ? (
+          <UsersList {...props} />
         ) : (
           <Redirect to="/" />
         )
