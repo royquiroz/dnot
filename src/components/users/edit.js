@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 //import { Link } from "react-router-dom";
 import { message } from "antd";
-import { userInformation, changeUserInformation } from "../../../services/user";
+import { userInformation, changeUserInformation } from "../../services/user";
 
-import Navbar from "../../navbar/navbar";
+import Navbar from "../../components/navbar/navbar";
 
-class Profile extends Component {
+class EditUser extends Component {
   constructor() {
     super();
     this.state = {
@@ -13,16 +13,11 @@ class Profile extends Component {
     };
   }
 
-  componentWillUnmount() {
-    let userId = { id: JSON.parse(localStorage.getItem("user")).usuario_id };
-
-    userInformation(userId).then(res =>
-      localStorage.setItem("user", JSON.stringify(res.data.result[0]))
-    );
-  }
-
   componentWillMount() {
-    this.setState({ user: JSON.parse(localStorage.getItem("user")) });
+    userInformation(this.props.match.params).then(res =>
+      this.setState({ user: res.result[0] })
+    );
+    //console.log(this.props.match.params);
   }
 
   handleChange = e => {
@@ -47,6 +42,8 @@ class Profile extends Component {
     if (user.response === true) {
       message.success(user.message, 3);
     }
+
+    this.props.history.push("/users-list");
   };
 
   render() {
@@ -114,4 +111,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default EditUser;

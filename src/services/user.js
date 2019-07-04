@@ -11,8 +11,6 @@ export const userInformation = async userId => {
     headers
   });
 
-  localStorage.setItem("user", JSON.stringify(res.data.result[0]));
-
   return res.data;
 };
 

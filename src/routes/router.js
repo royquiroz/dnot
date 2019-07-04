@@ -8,6 +8,7 @@ import Validation from "../components/account/validation/validation";
 import Profile from "../components/account/profile/profile";
 import FileUpload from "../components/upload/upload";
 import UsersList from "../components/users/users";
+import EditUser from "../components/users/edit";
 
 const Router = () => (
   <Switch>
@@ -83,6 +84,17 @@ const Router = () => (
       render={props =>
         localStorage.getItem("token") ? (
           <UsersList {...props} />
+        ) : (
+          <Redirect to="/" />
+        )
+      }
+    />
+    <Route
+      exact
+      path="/user/:id"
+      render={props =>
+        localStorage.getItem("token") ? (
+          <EditUser {...props} />
         ) : (
           <Redirect to="/" />
         )
