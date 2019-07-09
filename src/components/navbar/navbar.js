@@ -27,7 +27,7 @@ const ProfileMenu = (
         Perfil
       </NavLink>
     </Menu.Item>
-    {JSON.parse(localStorage.getItem("id")) === 2 ? (
+    {localStorage.getItem("id") === '2' ? (
       <Menu.Item>
         <NavLink rel="noopener noreferrer" to="/users-list">
           Lista de usuarios

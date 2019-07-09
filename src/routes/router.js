@@ -6,6 +6,8 @@ import Register from "../components/account/register/register";
 import Forgot from "../components/account/forgot/forgot";
 import Validation from "../components/account/validation/validation";
 import Profile from "../components/account/profile/profile";
+
+import Home from "../components/home/home";
 import FileUpload from "../components/upload/upload";
 import UsersList from "../components/users/users";
 import EditUser from "../components/users/edit";
@@ -30,7 +32,7 @@ const Router = () => (
         !localStorage.getItem("token") ? (
           <Register {...props} />
         ) : (
-          <Redirect to="/upload" />
+          <Redirect to="/home" />
         )
       }
     />
@@ -41,7 +43,7 @@ const Router = () => (
         !localStorage.getItem("token") ? (
           <Forgot {...props} />
         ) : (
-          <Redirect to="/upload" />
+          <Redirect to="/home" />
         )
       }
     />
@@ -52,7 +54,18 @@ const Router = () => (
         !localStorage.getItem("token") ? (
           <Validation {...props} />
         ) : (
-          <Redirect to="/upload" />
+          <Redirect to="/home" />
+        )
+      }
+    />
+    <Route
+      exact
+      path="/home"
+      render={props =>
+        localStorage.getItem("token") ? (
+          <Home {...props} />
+        ) : (
+          <Redirect to="/" />
         )
       }
     />
