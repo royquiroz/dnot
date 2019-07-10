@@ -2,23 +2,9 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, Dropdown, Avatar } from "antd";
 
+import { options } from "../../utils/options";
 import { removeToken } from "../../services/login";
 import "./navbar.css";
-
-const tabs = [
-  {
-    name: "ISR x Enaj",
-    link: "/upload"
-  },
-  {
-    name: "Prueba",
-    link: "/prueba"
-  },
-  {
-    name: "Prueba",
-    link: "/prueba"
-  }
-];
 
 const ProfileMenu = (
   <Menu>
@@ -27,7 +13,7 @@ const ProfileMenu = (
         Perfil
       </NavLink>
     </Menu.Item>
-    {localStorage.getItem("id") === '2' ? (
+    {localStorage.getItem("id") === "2" ? (
       <Menu.Item>
         <NavLink rel="noopener noreferrer" to="/users-list">
           Lista de usuarios
@@ -59,11 +45,13 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="margin-icon">
-          <img
-            src="https://mideclaranot.com/dnot/wp-content/uploads/2019/06/dnot.mx_.png"
-            className="d-inline-block align-top logo"
-            alt="logo"
-          />
+          <NavLink className="navbar-brand" to="/home">
+            <img
+              src="https://mideclaranot.com/dnot/wp-content/uploads/2019/06/dnot.mx_.png"
+              className="d-inline-block align-top logo"
+              alt="logo"
+            />
+          </NavLink>
         </div>
         <button
           className="navbar-toggler"
@@ -82,10 +70,10 @@ class Navbar extends Component {
           id="navbarToggler"
         >
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-            {tabs.map((tab, i) => (
+            {options.map((option, i) => (
               <li key={i} className="nav-item">
-                <NavLink className="nav-link" to={tab.link}>
-                  {tab.name}
+                <NavLink className="nav-link" to={option.link}>
+                  {option.name}
                 </NavLink>
               </li>
             ))}

@@ -44,3 +44,7 @@
     height: 128px;
   }
 }
+
+.margin-title-card {
+  margin: 0.75rem 0;
+}

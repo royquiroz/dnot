@@ -21,7 +21,7 @@ const Router = () => (
         !localStorage.getItem("token") ? (
           <Login {...props} />
         ) : (
-          <Redirect to="/upload" />
+          <Redirect to="/home" />
         )
       }
     />

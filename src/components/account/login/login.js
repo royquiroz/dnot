@@ -29,7 +29,7 @@ class Login extends Component {
       let check = await validateToken();
 
       //console.log(check.message);
-      if (check.response) this.props.history.push("/upload");
+      if (check.response) this.props.history.push("/home");
     }
 
     //console.log(token);
@@ -38,6 +38,7 @@ class Login extends Component {
       message.error(token.message, 3);
     } else if (token.response === true) {
       message.success(token.message, 3);
+      window.location.reload();
     } else {
       message.error(token.message, 3);
     }
